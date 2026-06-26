@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ChevronLeft, ChevronRight, Sparkles, X } from "lucide-react";
 import { useMarketData } from "../../contexts/MarketDataContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { investApi } from "../../services/investApi";
 import { toast } from "sonner";
 import { StockMarketGlassSelect } from "../StockMarketGlassSelect";
@@ -79,6 +80,8 @@ export function CreateBotWizard({
   onCreated: () => void;
 }) {
   const { markets, marketsCategoryFilter, marketsSortBy } = useMarketData();
+  const { text } = useLanguage();
+  const t = text.pages.aiTradingWizard;
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<WizardFormState>(defaultForm);
   const [confirmRisk, setConfirmRisk] = useState(false);
@@ -111,7 +114,7 @@ export function CreateBotWizard({
 
   function goNext() {
     if (step === 3 && !selectedAssetSymbol) {
-      toast.error("Choisissez un actif avant de continuer.");
+      toast.error(t.errorChooseAsset);
       return;
     }
 
@@ -120,17 +123,17 @@ export function CreateBotWizard({
 
   async function submit() {
     if (!selectedAssetSymbol) {
-      toast.error("Choisissez un symbole d’actif.");
+      toast.error(t.errorChooseAssetSymbol);
       return;
     }
     if (!confirmRisk) {
-      toast.error("Vous devez confirmer avoir pris connaissance des risques.");
+      toast.error(t.errorConfirmRisk);
       return;
     }
     setBusy(true);
     try {
       await investApi.createAiTradingBot({
-        name: form.name.trim() || "Bot IA",
+        name: form.name.trim() || t.createBot,
         mode: form.mode,
         maxTransactionsPerDay: form.maxTransactionsPerDay,
         maxAllocation: form.maxAllocation,
@@ -149,12 +152,12 @@ export function CreateBotWizard({
           },
         ],
       });
-      toast.success("Bot créé. Vous pouvez le démarrer depuis le panneau de contrôle.");
+      toast.success(t.successCreated);
       onOpenChange(false);
       reset();
       onCreated();
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Création impossible";
+      const msg = e instanceof Error ? e.message : t.errorCreationFailed;
       toast.error(msg);
     } finally {
       setBusy(false);
@@ -178,15 +181,13 @@ export function CreateBotWizard({
           <div className={`${glass} max-h-[90vh] overflow-y-auto`}>
             <div className="mb-4 flex items-center justify-between gap-3">
               <Dialog.Title className="text-lg font-semibold tracking-tight text-white">
-                Assistant de création — bot de trading IA
+                {t.title}
               </Dialog.Title>
               <Dialog.Close className="rounded-full p-2 text-zinc-400 transition hover:bg-white/5 hover:text-white">
                 <X className="h-5 w-5" />
               </Dialog.Close>
             </div>
-            <Dialog.Description className="sr-only">
-              Création guidée d’un bot avec contrôle des risques et conditions d’achat ou de vente.
-            </Dialog.Description>
+            <Dialog.Description className="sr-only">{t.description}</Dialog.Description>
 
             <div className="mb-4 flex gap-1">
               {[1, 2, 3, 4, 5].map((s) => (
@@ -200,16 +201,16 @@ export function CreateBotWizard({
             {step === 1 && (
               <div className="space-y-4">
                 <label className="block text-sm text-zinc-300">
-                  Nom du bot
+                  {t.botNameLabel}
                   <input
                     className="mt-1 w-full rounded-xl border border-white/10 bg-black/30 px-3 py-2.5 text-white outline-none ring-cyan-400/40 focus:ring-2"
                     value={form.name}
                     onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                    placeholder="ex. Stratégie BVMT prudente"
+                    placeholder={t.botNamePlaceholder}
                   />
                 </label>
                 <div>
-                  <p className="mb-2 text-sm text-zinc-300">Mode</p>
+                  <p className="mb-2 text-sm text-zinc-300">{t.modeLabel}</p>
                   <div className="grid gap-2 sm:grid-cols-2">
                     <button
                       type="button"
@@ -220,8 +221,8 @@ export function CreateBotWizard({
                           : "border-white/10 bg-black/20 text-zinc-300 hover:border-white/20"
                       }`}
                     >
-                      Stratégie manuelle
-                      <span className="mt-1 block text-xs text-zinc-500">Règles explicites (% seuil, prix…)</span>
+                      {t.manualStrategy}
+                      <span className="mt-1 block text-xs text-zinc-500">{t.manualStrategyHint}</span>
                     </button>
                     <button
                       type="button"
@@ -233,9 +234,9 @@ export function CreateBotWizard({
                       }`}
                     >
                       <span className="inline-flex items-center gap-1">
-                        <Sparkles className="h-4 w-4" /> Stratégie IA
+                        <Sparkles className="h-4 w-4" /> {t.aiStrategy}
                       </span>
-                      <span className="mt-1 block text-xs text-zinc-500">Score pondéré (tendance, volatilité…)</span>
+                      <span className="mt-1 block text-xs text-zinc-500">{t.aiStrategyHint}</span>
                     </button>
                   </div>
                 </div>
@@ -245,7 +246,7 @@ export function CreateBotWizard({
             {step === 2 && (
               <div className="space-y-4">
                 <label className="block text-sm text-zinc-300">
-                  Budget max par opération (TND)
+                  {t.maxAllocationLabel}
                   <input
                     type="number"
                     min={10}
@@ -255,7 +256,7 @@ export function CreateBotWizard({
                   />
                 </label>
                 <label className="block text-sm text-zinc-300">
-                  Transactions max / jour
+                  {t.maxTransactionsLabel}
                   <input
                     type="number"
                     min={1}
@@ -268,7 +269,7 @@ export function CreateBotWizard({
                   />
                 </label>
                 <div>
-                  <p className="mb-2 text-sm text-zinc-300">Niveau de risque</p>
+                  <p className="mb-2 text-sm text-zinc-300">{t.riskLevelLabel}</p>
                   <input
                     type="range"
                     min={0}
@@ -283,9 +284,9 @@ export function CreateBotWizard({
                     className="w-full accent-cyan-400"
                   />
                   <div className="mt-1 flex justify-between text-xs text-zinc-500">
-                    <span>Faible</span>
-                    <span>Moyen</span>
-                    <span>Élevé</span>
+                    <span>{t.riskLow}</span>
+                    <span>{t.riskMedium}</span>
+                    <span>{t.riskHigh}</span>
                   </div>
                 </div>
               </div>
@@ -294,7 +295,7 @@ export function CreateBotWizard({
             {step === 3 && (
               <div className="space-y-4">
                 <div>
-                  <p className="mb-2 block text-sm text-zinc-300">Actif (symbole)</p>
+                  <p className="mb-2 block text-sm text-zinc-300">{t.assetSymbolLabel}</p>
                   <StockMarketGlassSelect
                     items={marketOptionsForDropdown}
                     value={selectedAssetSymbol}
@@ -302,37 +303,39 @@ export function CreateBotWizard({
                       const symbol = normalizeAssetSymbol(selection);
                       setForm((f) => ({ ...f, assetSymbol: symbol }));
                     }}
-                    placeholder="— Choisir une action —"
-                    listEmptyLabel="Aucun actif pour le filtre Marchés actuel. Ajustez les filtres sur la page Marchés."
+                    placeholder={t.assetPlaceholder}
+                    listEmptyLabel={t.assetEmptyLabel}
                     disabled={busy}
                   />
                   {!selectedAssetSymbol && (
-                    <p className="mt-2 text-xs text-amber-200/90">
-                      Veuillez choisir un actif pour continuer.
-                    </p>
+                    <p className="mt-2 text-xs text-amber-200/90">{t.assetRequiredHint}</p>
                   )}
                 </div>
                 <div>
-                  <p className="mb-2 text-sm text-zinc-300">Condition d’achat</p>
+                  <p className="mb-2 text-sm text-zinc-300">{t.buyConditionLabel}</p>
                   <div className="flex flex-wrap gap-2">
-                    {(["percentage", "price", "ai_signal"] as const).map((t) => (
+                    {(["percentage", "price", "ai_signal"] as const).map((condition) => (
                       <button
-                        key={t}
+                        key={condition}
                         type="button"
-                        onClick={() => setForm((f) => ({ ...f, buyConditionType: t }))}
+                        onClick={() => setForm((f) => ({ ...f, buyConditionType: condition }))}
                         className={`rounded-lg border px-3 py-1.5 text-xs ${
-                          form.buyConditionType === t
+                          form.buyConditionType === condition
                             ? "border-cyan-400/60 bg-cyan-500/15 text-cyan-100"
                             : "border-white/10 text-zinc-400 hover:border-white/20"
                         }`}
                       >
-                        {t === "percentage" ? "% baisse" : t === "price" ? "Prix max" : "Signal IA"}
+                        {condition === "percentage"
+                          ? t.buyConditionPercentage
+                          : condition === "price"
+                          ? t.buyConditionPrice
+                          : t.buyConditionAiSignal}
                       </button>
                     ))}
                   </div>
                 </div>
                 <label className="block text-sm text-zinc-300">
-                  Seuil d’achat (%, ou prix TND selon le mode)
+                  {t.buyThresholdLabel}
                   <input
                     type="number"
                     step="0.01"
@@ -348,7 +351,7 @@ export function CreateBotWizard({
                     onChange={(e) => setForm((f) => ({ ...f, useAiBuySignal: e.target.checked }))}
                     className="size-4 rounded border-white/20 bg-black/40 accent-cyan-400"
                   />
-                  Renforcer avec signal IA (mode manuel)
+                  {t.reinforceWithAiSignal}
                 </label>
               </div>
             )}
@@ -356,7 +359,7 @@ export function CreateBotWizard({
             {step === 4 && (
               <div className="space-y-4">
                 <label className="block text-sm text-zinc-300">
-                  Take profit (%)
+                  {t.takeProfitLabel}
                   <input
                     type="number"
                     min={0}
@@ -372,7 +375,7 @@ export function CreateBotWizard({
                   />
                 </label>
                 <label className="block text-sm text-zinc-300">
-                  Stop loss (%)
+                  {t.stopLossLabel}
                   <input
                     type="number"
                     min={0}
@@ -388,7 +391,7 @@ export function CreateBotWizard({
                     onChange={(e) => setForm((f) => ({ ...f, useAiExit: e.target.checked }))}
                     className="size-4 rounded border-white/20 bg-black/40 accent-emerald-400"
                   />
-                  Sortie assistée par IA
+                  {t.useAiExitLabel}
                 </label>
               </div>
             )}
@@ -396,31 +399,27 @@ export function CreateBotWizard({
             {step === 5 && (
               <div className="space-y-4 text-sm text-zinc-300">
                 <div className="rounded-xl border border-white/10 bg-black/25 p-4 text-xs leading-relaxed text-zinc-400">
-                  <p className="mb-2 font-medium text-amber-200/90">Avertissement risque</p>
-                  Le trading automatisé comporte un risque de perte en capital. Les performances passées ne
-                  préjugent pas des résultats futurs. Le moteur s’appuie sur des données de marché qui peuvent être
-                  indisponibles ou retardées.
+                  <p className="mb-2 font-medium text-amber-200/90">{t.riskWarningTitle}</p>
+                  {t.riskWarningBody}
                 </div>
                 <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-4">
-                  <p className="text-xs text-zinc-400">Score de risque estimé (indicatif)</p>
+                  <p className="text-xs text-zinc-400">{t.riskScoreTitle}</p>
                   <p className="mt-1 text-3xl font-semibold tabular-nums text-cyan-200">{score}</p>
-                  <p className="mt-1 text-[11px] text-zinc-500">
-                    Basé sur le plafond par trade, le niveau de risque et la fréquence max.
-                  </p>
+                  <p className="mt-1 text-[11px] text-zinc-500">{t.riskScoreSubtitle}</p>
                 </div>
                 <ul className="space-y-1 rounded-xl border border-white/10 bg-black/20 p-3 text-xs text-zinc-400">
                   <li>
-                    <span className="text-zinc-500">Nom :</span> {form.name || "—"}
+                    <span className="text-zinc-500">{t.summaryNameLabel}</span> {form.name || "—"}
                   </li>
                   <li>
-                    <span className="text-zinc-500">Mode :</span>{" "}
-                    {form.mode === "ai_strategy" ? "IA" : "Manuel"}
+                    <span className="text-zinc-500">{t.summaryModeLabel}</span>{" "}
+                    {form.mode === "ai_strategy" ? t.aiStrategy : t.manualStrategy}
                   </li>
                   <li>
-                    <span className="text-zinc-500">Max / trade :</span> {form.maxAllocation} TND
+                    <span className="text-zinc-500">{t.summaryMaxTradeLabel}</span> {form.maxAllocation} TND
                   </li>
                   <li>
-                    <span className="text-zinc-500">Actif :</span> {selectedAssetSymbol || "—"}
+                    <span className="text-zinc-500">{t.summaryAssetLabel}</span> {selectedAssetSymbol || "—"}
                   </li>
                 </ul>
                 <label className="flex cursor-pointer items-start gap-2 text-xs text-zinc-300">
@@ -430,8 +429,7 @@ export function CreateBotWizard({
                     onChange={(e) => setConfirmRisk(e.target.checked)}
                     className="mt-0.5 size-4 rounded border-white/20 bg-black/40 accent-cyan-400"
                   />
-                  Je confirme avoir lu l’avertissement et accepter le lancement ultérieur du bot sous ma
-                  responsabilité.
+                  {t.confirmRiskLabel}
                 </label>
               </div>
             )}
@@ -443,7 +441,7 @@ export function CreateBotWizard({
                 onClick={() => setStep((s) => Math.max(1, s - 1))}
                 className="inline-flex items-center gap-1 rounded-xl border border-white/10 px-4 py-2.5 text-sm text-zinc-200 transition hover:bg-white/5 disabled:opacity-40"
               >
-                <ChevronLeft className="h-4 w-4" /> Retour
+                <ChevronLeft className="h-4 w-4" /> {t.back}
               </button>
               {step < 5 ? (
                 <button
@@ -452,7 +450,7 @@ export function CreateBotWizard({
                   onClick={goNext}
                   className="inline-flex items-center gap-1 rounded-xl bg-gradient-to-r from-cyan-500/90 to-emerald-500/80 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-cyan-500/20 transition disabled:cursor-not-allowed disabled:opacity-45"
                 >
-                  Suivant <ChevronRight className="h-4 w-4" />
+                  {t.next} <ChevronRight className="h-4 w-4" />
                 </button>
               ) : (
                 <button
@@ -461,7 +459,7 @@ export function CreateBotWizard({
                   onClick={() => void submit()}
                   className="rounded-xl bg-gradient-to-r from-emerald-500/90 to-cyan-500/80 px-5 py-2.5 text-sm font-semibold text-white shadow-lg disabled:opacity-50"
                 >
-                  {busy ? "Création…" : "Créer le bot"}
+                  {busy ? t.creating : t.createBot}
                 </button>
               )}
             </div>

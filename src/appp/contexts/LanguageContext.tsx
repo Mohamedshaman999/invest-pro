@@ -211,6 +211,97 @@ type TranslationPack = {
       pickAsset: string;
       error: string;
     };
+    aiTradingPage: {
+      moduleLabel: string;
+      title: string;
+      subtitle: string;
+      newBot: string;
+      verificationRequired: string;
+      activeBotsHeading: string;
+      loading: string;
+      emptyBots: string;
+      pnlTitle: string;
+      pnlSubtitle: string;
+      socketStream: string;
+      controlPanelTitle: string;
+      selectedBot: string;
+      modeManual: string;
+      modeAiStrategy: string;
+      transactionsPerDay: string;
+      start: string;
+      pause: string;
+      stopHard: string;
+      realizedLossToday: string;
+      operationsFeedTitle: string;
+      marketBannerUnavailable: string;
+      feedLoading: string;
+      feedEmpty: string;
+      tableHeaderAsset: string;
+      tableHeaderAction: string;
+      tableHeaderAmount: string;
+      tableHeaderResult: string;
+      tableHeaderTime: string;
+      actionBuy: string;
+      actionSell: string;
+      statusSuccess: string;
+      statusPending: string;
+      statusFailed: string;
+      loadBotsError: string;
+      loadFeedError: string;
+      dailyLossLimitReached: string;
+      botStartedToast: string;
+      botPausedToast: string;
+      botStoppedToast: string;
+      actionFailed: string;
+    };
+    aiTradingWizard: {
+      title: string;
+      description: string;
+      botNameLabel: string;
+      botNamePlaceholder: string;
+      modeLabel: string;
+      manualStrategy: string;
+      manualStrategyHint: string;
+      aiStrategy: string;
+      aiStrategyHint: string;
+      maxAllocationLabel: string;
+      maxTransactionsLabel: string;
+      riskLevelLabel: string;
+      riskLow: string;
+      riskMedium: string;
+      riskHigh: string;
+      assetSymbolLabel: string;
+      assetPlaceholder: string;
+      assetEmptyLabel: string;
+      assetRequiredHint: string;
+      buyConditionLabel: string;
+      buyConditionPercentage: string;
+      buyConditionPrice: string;
+      buyConditionAiSignal: string;
+      buyThresholdLabel: string;
+      reinforceWithAiSignal: string;
+      takeProfitLabel: string;
+      stopLossLabel: string;
+      useAiExitLabel: string;
+      riskWarningTitle: string;
+      riskWarningBody: string;
+      riskScoreTitle: string;
+      riskScoreSubtitle: string;
+      summaryNameLabel: string;
+      summaryModeLabel: string;
+      summaryMaxTradeLabel: string;
+      summaryAssetLabel: string;
+      confirmRiskLabel: string;
+      back: string;
+      next: string;
+      createBot: string;
+      creating: string;
+      errorChooseAsset: string;
+      errorChooseAssetSymbol: string;
+      errorConfirmRisk: string;
+      successCreated: string;
+      errorCreationFailed: string;
+    };
     simulator: {
       title: string;
       subtitle: string;
@@ -623,6 +714,99 @@ const translations: Record<AppLanguage, TranslationPack> = {
         loadingAssets: "Chargement des actifs...",
         pickAsset: "Choisissez un actif dans la liste ou cherchez par code.",
         error: "Impossible de charger l'explication. Verifiez le backend ou reessayez.",
+      },
+      aiTradingPage: {
+        moduleLabel: "Trading IA",
+        title: "Trading IA",
+        subtitle: "Gérez vos bots de trading automatisé et suivez les opérations en temps réel.",
+        newBot: "Nouveau bot",
+        verificationRequired: "Veuillez vérifier votre e-mail pour accéder au trading.",
+        activeBotsHeading: "Bots actifs",
+        loading: "Chargement...",
+        emptyBots: "Aucun bot disponible.",
+        pnlTitle: "Profit net",
+        pnlSubtitle: "P&L total de vos bots",
+        socketStream: "Flux en direct des opérations",
+        controlPanelTitle: "Panneau de contrôle",
+        selectedBot: "Bot sélectionné :",
+        modeManual: "Manuel",
+        modeAiStrategy: "Stratégie IA",
+        transactionsPerDay: "tx/j",
+        start: "Démarrer",
+        pause: "Pause",
+        stopHard: "Arrêt dur",
+        realizedLossToday: "Perte réalisée aujourd'hui :",
+        operationsFeedTitle: "Flux d'opérations",
+        marketBannerUnavailable: "Historique indisponible pour ce bot.",
+        feedLoading: "Chargement du flux...",
+        feedEmpty: "Aucune opération enregistrée.",
+        tableHeaderAsset: "Actif",
+        tableHeaderAction: "Action",
+        tableHeaderAmount: "Montant",
+        tableHeaderResult: "Résultat",
+        tableHeaderTime: "Heure",
+        actionBuy: "Achat",
+        actionSell: "Vente",
+        statusSuccess: "Succès",
+        statusPending: "En attente",
+        statusFailed: "Échec",
+        loadBotsError: "Impossible de charger les bots.",
+        loadFeedError: "Impossible de charger l'historique du bot.",
+        dailyLossLimitReached: "Limite de perte journalière atteinte : le bot a été arrêté.",
+        botStartedToast: "Bot démarré.",
+        botPausedToast: "Bot en pause.",
+        botStoppedToast: "Bot arrêté.",
+        actionFailed: "Action impossible.",
+      },
+      aiTradingWizard: {
+        title: "Assistant de création — bot de trading IA",
+        description: "Création guidée d’un bot avec contrôle des risques et conditions d’achat ou de vente.",
+        botNameLabel: "Nom du bot",
+        botNamePlaceholder: "ex. Stratégie BVMT prudente",
+        modeLabel: "Mode",
+        manualStrategy: "Stratégie manuelle",
+        manualStrategyHint: "Règles explicites (% seuil, prix...)",
+        aiStrategy: "Stratégie IA",
+        aiStrategyHint: "Score pondéré (tendance, volatilité...)",
+        maxAllocationLabel: "Budget max par opération (TND)",
+        maxTransactionsLabel: "Transactions max / jour",
+        riskLevelLabel: "Niveau de risque",
+        riskLow: "Faible",
+        riskMedium: "Moyen",
+        riskHigh: "Élevé",
+        assetSymbolLabel: "Actif (symbole)",
+        assetPlaceholder: "— Choisir une action —",
+        assetEmptyLabel: "Aucun actif pour le filtre Marchés actuel. Ajustez les filtres sur la page Marchés.",
+        assetRequiredHint: "Veuillez choisir un actif pour continuer.",
+        buyConditionLabel: "Condition d’achat",
+        buyConditionPercentage: "% baisse",
+        buyConditionPrice: "Prix max",
+        buyConditionAiSignal: "Signal IA",
+        buyThresholdLabel: "Seuil d’achat (%, ou prix TND selon le mode)",
+        reinforceWithAiSignal: "Renforcer avec signal IA (mode manuel)",
+        takeProfitLabel: "Take profit (%)",
+        stopLossLabel: "Stop loss (%)",
+        useAiExitLabel: "Sortie assistée par IA",
+        riskWarningTitle: "Avertissement risque",
+        riskWarningBody:
+          "Le trading automatisé comporte un risque de perte en capital. Les performances passées ne préjugent pas des résultats futurs. Le moteur s’appuie sur des données de marché qui peuvent être indisponibles ou retardées.",
+        riskScoreTitle: "Score de risque estimé (indicatif)",
+        riskScoreSubtitle: "Basé sur le plafond par trade, le niveau de risque et la fréquence max.",
+        summaryNameLabel: "Nom :",
+        summaryModeLabel: "Mode :",
+        summaryMaxTradeLabel: "Max / trade :",
+        summaryAssetLabel: "Actif :",
+        confirmRiskLabel:
+          "Je confirme avoir lu l’avertissement et accepter le lancement ultérieur du bot sous ma responsabilité.",
+        back: "Retour",
+        next: "Suivant",
+        createBot: "Créer le bot",
+        creating: "Création...",
+        errorChooseAsset: "Choisissez un actif avant de continuer.",
+        errorChooseAssetSymbol: "Choisissez un symbole d’actif.",
+        errorConfirmRisk: "Vous devez confirmer avoir pris connaissance des risques.",
+        successCreated: "Bot créé. Vous pouvez le démarrer depuis le panneau de contrôle.",
+        errorCreationFailed: "Création impossible",
       },
       simulator: {
         title: "Simulateur d'investissement",
@@ -1090,6 +1274,99 @@ const translations: Record<AppLanguage, TranslationPack> = {
         pickAsset: "Pick an asset from the list or search by ticker.",
         error: "Could not load the explanation. Check the API or try again.",
       },
+      aiTradingPage: {
+        moduleLabel: "AI trading",
+        title: "AI trading",
+        subtitle: "Manage your automated trading bots and watch activity in real time.",
+        newBot: "New bot",
+        verificationRequired: "Verify your email to access trading.",
+        activeBotsHeading: "Active bots",
+        loading: "Loading...",
+        emptyBots: "No bots found.",
+        pnlTitle: "Net P&L",
+        pnlSubtitle: "Cumulative profit and loss from your bots",
+        socketStream: "Live operation stream",
+        controlPanelTitle: "Control panel",
+        selectedBot: "Selected bot:",
+        modeManual: "Manual",
+        modeAiStrategy: "AI strategy",
+        transactionsPerDay: "tx/day",
+        start: "Start",
+        pause: "Pause",
+        stopHard: "Hard stop",
+        realizedLossToday: "Realized loss today:",
+        operationsFeedTitle: "Operations feed",
+        marketBannerUnavailable: "History unavailable for this bot.",
+        feedLoading: "Loading feed...",
+        feedEmpty: "No operations recorded.",
+        tableHeaderAsset: "Asset",
+        tableHeaderAction: "Action",
+        tableHeaderAmount: "Amount",
+        tableHeaderResult: "Result",
+        tableHeaderTime: "Time",
+        actionBuy: "Buy",
+        actionSell: "Sell",
+        statusSuccess: "Success",
+        statusPending: "Pending",
+        statusFailed: "Failed",
+        loadBotsError: "Unable to load bots.",
+        loadFeedError: "Unable to load bot history.",
+        dailyLossLimitReached: "Daily loss limit reached: the bot has been stopped.",
+        botStartedToast: "Bot started.",
+        botPausedToast: "Bot paused.",
+        botStoppedToast: "Bot stopped.",
+        actionFailed: "Action failed.",
+      },
+      aiTradingWizard: {
+        title: "Creation wizard — AI trading bot",
+        description: "Guided bot creation with risk controls and buy/sell conditions.",
+        botNameLabel: "Bot name",
+        botNamePlaceholder: "e.g. Conservative BVMT strategy",
+        modeLabel: "Mode",
+        manualStrategy: "Manual strategy",
+        manualStrategyHint: "Explicit rules (% threshold, price...)",
+        aiStrategy: "AI strategy",
+        aiStrategyHint: "Weighted score (trend, volatility...)",
+        maxAllocationLabel: "Max allocation per trade (TND)",
+        maxTransactionsLabel: "Max transactions per day",
+        riskLevelLabel: "Risk level",
+        riskLow: "Low",
+        riskMedium: "Medium",
+        riskHigh: "High",
+        assetSymbolLabel: "Asset (symbol)",
+        assetPlaceholder: "— Pick an asset —",
+        assetEmptyLabel: "No assets match the current Markets filter. Adjust filters on the Markets page.",
+        assetRequiredHint: "Please choose an asset to continue.",
+        buyConditionLabel: "Buy condition",
+        buyConditionPercentage: "% drop",
+        buyConditionPrice: "Max price",
+        buyConditionAiSignal: "AI signal",
+        buyThresholdLabel: "Buy threshold (% or TND price depending on mode)",
+        reinforceWithAiSignal: "Reinforce with AI signal (manual mode)",
+        takeProfitLabel: "Take profit (%)",
+        stopLossLabel: "Stop loss (%)",
+        useAiExitLabel: "AI-assisted exit",
+        riskWarningTitle: "Risk warning",
+        riskWarningBody:
+          "Automated trading carries a risk of capital loss. Past performance does not guarantee future results. The engine relies on market data that may be unavailable or delayed.",
+        riskScoreTitle: "Estimated risk score (indicative)",
+        riskScoreSubtitle: "Based on max allocation per trade, risk level, and the frequency cap.",
+        summaryNameLabel: "Name:",
+        summaryModeLabel: "Mode:",
+        summaryMaxTradeLabel: "Max / trade:",
+        summaryAssetLabel: "Asset:",
+        confirmRiskLabel:
+          "I confirm I have read the warning and accept that starting the bot is my responsibility.",
+        back: "Back",
+        next: "Next",
+        createBot: "Create bot",
+        creating: "Creating...",
+        errorChooseAsset: "Choose an asset before continuing.",
+        errorChooseAssetSymbol: "Choose an asset symbol.",
+        errorConfirmRisk: "You must confirm that you understand the risks.",
+        successCreated: "Bot created. You can start it from the control panel.",
+        errorCreationFailed: "Creation failed",
+      },
       simulator: {
         title: "Investment simulator",
         subtitle: "Monthly savings projection: the annual return is estimated from your portfolio and market history (Yahoo Finance).",
@@ -1554,6 +1831,99 @@ const translations: Record<AppLanguage, TranslationPack> = {
         loadingAssets: "Cargando activos...",
         pickAsset: "Elige un activo de la lista o busca por ticker.",
         error: "No se pudo cargar. Revisa la API o intentalo de nuevo.",
+      },
+      aiTradingPage: {
+        moduleLabel: "Trading IA",
+        title: "Trading IA",
+        subtitle: "Gestiona tus bots de trading automatizado y sigue la actividad en tiempo real.",
+        newBot: "Nuevo bot",
+        verificationRequired: "Verifica tu correo para acceder al trading.",
+        activeBotsHeading: "Bots activos",
+        loading: "Cargando...",
+        emptyBots: "No hay bots.",
+        pnlTitle: "P&L neto",
+        pnlSubtitle: "Ganancias y pérdidas acumuladas de tus bots",
+        socketStream: "Flujo de operaciones en vivo",
+        controlPanelTitle: "Panel de control",
+        selectedBot: "Bot seleccionado:",
+        modeManual: "Manual",
+        modeAiStrategy: "Estrategia IA",
+        transactionsPerDay: "tx/día",
+        start: "Iniciar",
+        pause: "Pausa",
+        stopHard: "Parada forzada",
+        realizedLossToday: "Pérdida realizada hoy:",
+        operationsFeedTitle: "Flujo de operaciones",
+        marketBannerUnavailable: "Historial no disponible para este bot.",
+        feedLoading: "Cargando flujo...",
+        feedEmpty: "No hay operaciones registradas.",
+        tableHeaderAsset: "Activo",
+        tableHeaderAction: "Acción",
+        tableHeaderAmount: "Importe",
+        tableHeaderResult: "Resultado",
+        tableHeaderTime: "Hora",
+        actionBuy: "Compra",
+        actionSell: "Venta",
+        statusSuccess: "Éxito",
+        statusPending: "Pendiente",
+        statusFailed: "Fallido",
+        loadBotsError: "No se pudieron cargar los bots.",
+        loadFeedError: "No se pudo cargar el historial del bot.",
+        dailyLossLimitReached: "Límite de pérdida diario alcanzado: el bot se ha detenido.",
+        botStartedToast: "Bot iniciado.",
+        botPausedToast: "Bot en pausa.",
+        botStoppedToast: "Bot detenido.",
+        actionFailed: "Acción fallida.",
+      },
+      aiTradingWizard: {
+        title: "Asistente de creacion — bot de trading IA",
+        description: "Creacion guiada de un bot con controles de riesgo y condiciones de compra/venta.",
+        botNameLabel: "Nombre del bot",
+        botNamePlaceholder: "ej. Estrategia BVMT conservadora",
+        modeLabel: "Modo",
+        manualStrategy: "Estrategia manual",
+        manualStrategyHint: "Reglas explicitas (% umbral, precio...)",
+        aiStrategy: "Estrategia IA",
+        aiStrategyHint: "Puntuacion ponderada (tendencia, volatilidad...)",
+        maxAllocationLabel: "Asignacion max por operacion (TND)",
+        maxTransactionsLabel: "Transacciones max / dia",
+        riskLevelLabel: "Nivel de riesgo",
+        riskLow: "Bajo",
+        riskMedium: "Medio",
+        riskHigh: "Alto",
+        assetSymbolLabel: "Activo (simbolo)",
+        assetPlaceholder: "— Elegir un activo —",
+        assetEmptyLabel: "Ningun activo coincide con el filtro actual de Mercados. Ajusta los filtros en la pagina Mercados.",
+        assetRequiredHint: "Por favor elige un activo para continuar.",
+        buyConditionLabel: "Condicion de compra",
+        buyConditionPercentage: "% caída",
+        buyConditionPrice: "Precio max",
+        buyConditionAiSignal: "Senal IA",
+        buyThresholdLabel: "Umbral de compra (% o precio TND segun el modo)",
+        reinforceWithAiSignal: "Reforzar con senal IA (modo manual)",
+        takeProfitLabel: "Take profit (%)",
+        stopLossLabel: "Stop loss (%)",
+        useAiExitLabel: "Salida asistida por IA",
+        riskWarningTitle: "Advertencia de riesgo",
+        riskWarningBody:
+          "El trading automatizado conlleva un riesgo de perdida de capital. El rendimiento pasado no garantiza resultados futuros. El motor depende de datos de mercado que pueden no estar disponibles o retrasados.",
+        riskScoreTitle: "Puntuacion de riesgo estimada (indicativa)",
+        riskScoreSubtitle: "Basado en el tope por operacion, el nivel de riesgo y la frecuencia maxima.",
+        summaryNameLabel: "Nombre:",
+        summaryModeLabel: "Modo:",
+        summaryMaxTradeLabel: "Max / operacion:",
+        summaryAssetLabel: "Activo:",
+        confirmRiskLabel:
+          "Confirmo haber leido la advertencia y aceptar que iniciar el bot es mi responsabilidad.",
+        back: "Atras",
+        next: "Siguiente",
+        createBot: "Crear bot",
+        creating: "Creando...",
+        errorChooseAsset: "Elige un activo antes de continuar.",
+        errorChooseAssetSymbol: "Elige un simbolo de activo.",
+        errorConfirmRisk: "Debes confirmar que entiendes los riesgos.",
+        successCreated: "Bot creado. Puedes iniciarlo desde el panel de control.",
+        errorCreationFailed: "Creacion fallida",
       },
       simulator: {
         title: "Simulador de inversion",
@@ -2020,6 +2390,99 @@ const translations: Record<AppLanguage, TranslationPack> = {
         pickAsset: "Wahlen Sie ein Asset oder suchen Sie per Kürzel.",
         error: "Laden fehlgeschlagen. API prufen oder erneut versuchen.",
       },
+      aiTradingPage: {
+        moduleLabel: "KI-Trading",
+        title: "KI-Trading",
+        subtitle: "Verwalten Sie Ihre automatisierten Trading-Bots und beobachten Sie Aktivitäten in Echtzeit.",
+        newBot: "Neuer Bot",
+        verificationRequired: "Bestätigen Sie Ihre E-Mail, um mit dem Trading fortzufahren.",
+        activeBotsHeading: "Aktive Bots",
+        loading: "Laden...",
+        emptyBots: "Keine Bots gefunden.",
+        pnlTitle: "Netto P&L",
+        pnlSubtitle: "Kumulierte Gewinne und Verluste Ihrer Bots",
+        socketStream: "Live-Operations-Stream",
+        controlPanelTitle: "Steuerzentrale",
+        selectedBot: "Ausgewählter Bot:",
+        modeManual: "Manuell",
+        modeAiStrategy: "KI-Strategie",
+        transactionsPerDay: "tx/Tag",
+        start: "Start",
+        pause: "Pause",
+        stopHard: "Harter Stopp",
+        realizedLossToday: "Realisiert heute:",
+        operationsFeedTitle: "Operations-Stream",
+        marketBannerUnavailable: "Verlauf für diesen Bot nicht verfügbar.",
+        feedLoading: "Stream wird geladen...",
+        feedEmpty: "Keine Operationen vorhanden.",
+        tableHeaderAsset: "Asset",
+        tableHeaderAction: "Aktion",
+        tableHeaderAmount: "Betrag",
+        tableHeaderResult: "Ergebnis",
+        tableHeaderTime: "Zeit",
+        actionBuy: "Kaufen",
+        actionSell: "Verkaufen",
+        statusSuccess: "Erfolg",
+        statusPending: "Ausstehend",
+        statusFailed: "Fehlgeschlagen",
+        loadBotsError: "Bots konnten nicht geladen werden.",
+        loadFeedError: "Bot-Verlauf konnte nicht geladen werden.",
+        dailyLossLimitReached: "Tägliches Verlustlimit erreicht: Der Bot wurde gestoppt.",
+        botStartedToast: "Bot gestartet.",
+        botPausedToast: "Bot pausiert.",
+        botStoppedToast: "Bot gestoppt.",
+        actionFailed: "Aktion fehlgeschlagen.",
+      },
+      aiTradingWizard: {
+        title: "Erstellungsassistent — KI-Trading-Bot",
+        description: "Geführte Bot-Erstellung mit Risikokontrollen und Kauf-/Verkaufsbedingungen.",
+        botNameLabel: "Bot-Name",
+        botNamePlaceholder: "z.B. Konservative BVMT-Strategie",
+        modeLabel: "Modus",
+        manualStrategy: "Manuelle Strategie",
+        manualStrategyHint: "Explizite Regeln (% Schwelle, Preis...)",
+        aiStrategy: "KI-Strategie",
+        aiStrategyHint: "Gewichtete Bewertung (Trend, Volatilität...)",
+        maxAllocationLabel: "Maximale Zuordnung pro Trade (TND)",
+        maxTransactionsLabel: "Maximale Transaktionen pro Tag",
+        riskLevelLabel: "Risikostufe",
+        riskLow: "Niedrig",
+        riskMedium: "Mittel",
+        riskHigh: "Hoch",
+        assetSymbolLabel: "Asset (Symbol)",
+        assetPlaceholder: "— Wähle ein Asset —",
+        assetEmptyLabel: "Keine Assets stimmen mit dem aktuellen Marktfiler überein. Passe die Filter auf der Seite Märkte an.",
+        assetRequiredHint: "Bitte wähle ein Asset, um fortzufahren.",
+        buyConditionLabel: "Kaufbedingung",
+        buyConditionPercentage: "% Rückgang",
+        buyConditionPrice: "Maximalpreis",
+        buyConditionAiSignal: "KI-Signal",
+        buyThresholdLabel: "Kaufschwelle (% oder TND-Preis je nach Modus)",
+        reinforceWithAiSignal: "Mit KI-Signal verstärken (manueller Modus)",
+        takeProfitLabel: "Take profit (%)",
+        stopLossLabel: "Stop loss (%)",
+        useAiExitLabel: "KI-unterstützter Ausstieg",
+        riskWarningTitle: "Risikohinweis",
+        riskWarningBody:
+          "Automatisierter Handel birgt das Risiko eines Kapitalverlusts. Vergangene Performance garantiert keine zukünftigen Ergebnisse. Die Engine nutzt Marktdaten, die nicht verfügbar oder verzögert sein können.",
+        riskScoreTitle: "Geschätzte Risikobewertung (indikativ)",
+        riskScoreSubtitle: "Basierend auf Maximalallokation pro Trade, Risikostufe und Frequenzbegrenzung.",
+        summaryNameLabel: "Name:",
+        summaryModeLabel: "Modus:",
+        summaryMaxTradeLabel: "Max / Trade:",
+        summaryAssetLabel: "Asset:",
+        confirmRiskLabel:
+          "Ich bestätige, dass ich die Warnung gelesen habe und akzeptiere, dass das Starten des Bots in meiner Verantwortung liegt.",
+        back: "Zurück",
+        next: "Weiter",
+        createBot: "Bot erstellen",
+        creating: "Erstelle...",
+        errorChooseAsset: "Wähle ein Asset, um fortzufahren.",
+        errorChooseAssetSymbol: "Wähle ein Asset-Symbol.",
+        errorConfirmRisk: "Du musst bestätigen, dass du die Risiken verstanden hast.",
+        successCreated: "Bot erstellt. Du kannst ihn im Kontrollpanel starten.",
+        errorCreationFailed: "Erstellung fehlgeschlagen",
+      },
       simulator: {
         title: "Investment-Simulator",
         subtitle: "Monatliche Sparprojektion: die Jahresrendite wird aus Ihrem Portfolio und Marktdaten (Yahoo Finance) geschatzt.",
@@ -2484,6 +2947,99 @@ const translations: Record<AppLanguage, TranslationPack> = {
         loadingAssets: "جاري تحميل الاصول...",
         pickAsset: "اختر اصلا من القائمة او ابحث بالرمز.",
         error: "تعذر التحميل. تحقق من الخادم ثم حاول مجددا.",
+      },
+      aiTradingPage: {
+        moduleLabel: "تداول بالذكاء",
+        title: "تداول بالذكاء",
+        subtitle: "ادِر روبوتات التداول التلقائي وراقب النشاط في الوقت الحقيقي.",
+        newBot: "بوت جديد",
+        verificationRequired: "تحقق من بريدك الإلكتروني للوصول إلى التداول.",
+        activeBotsHeading: "البوتات النشطة",
+        loading: "جاري التحميل...",
+        emptyBots: "لا توجد بوتات.",
+        pnlTitle: "صافي الربح/الخسارة",
+        pnlSubtitle: "الأرباح والخسائر المتراكمة من بوتاتك",
+        socketStream: "تدفق العمليات المباشر",
+        controlPanelTitle: "لوحة التحكم",
+        selectedBot: "البوت المحدد:",
+        modeManual: "يدوي",
+        modeAiStrategy: "استراتيجية ذكاء اصطناعي",
+        transactionsPerDay: "عملية/يوم",
+        start: "تشغيل",
+        pause: "إيقاف مؤقت",
+        stopHard: "إيقاف فوري",
+        realizedLossToday: "الخسارة المحققة اليوم:",
+        operationsFeedTitle: "تدفق العمليات",
+        marketBannerUnavailable: "السجل غير متاح لهذا البوت.",
+        feedLoading: "جاري تحميل التدفق...",
+        feedEmpty: "لا توجد عمليات مسجلة.",
+        tableHeaderAsset: "الأصل",
+        tableHeaderAction: "الإجراء",
+        tableHeaderAmount: "المبلغ",
+        tableHeaderResult: "النتيجة",
+        tableHeaderTime: "الوقت",
+        actionBuy: "شراء",
+        actionSell: "بيع",
+        statusSuccess: "نجاح",
+        statusPending: "قيد الانتظار",
+        statusFailed: "فشل",
+        loadBotsError: "تعذر تحميل البوتات.",
+        loadFeedError: "تعذر تحميل سجل البوت.",
+        dailyLossLimitReached: "تم الوصول إلى حد الخسارة اليومي: تم إيقاف البوت.",
+        botStartedToast: "تم تشغيل البوت.",
+        botPausedToast: "تم إيقاف البوت مؤقتًا.",
+        botStoppedToast: "تم إيقاف البوت.",
+        actionFailed: "فشل الإجراء.",
+      },
+      aiTradingWizard: {
+        title: "مساعد انشاء - بوت تداول بالذكاء الاصطناعي",
+        description: "انشاء بوت موجه مع ضوابط للمخاطر وشروط شراء/بيع.",
+        botNameLabel: "اسم البوت",
+        botNamePlaceholder: "مثال: استراتيجية BVMT الحذرة",
+        modeLabel: "الوضع",
+        manualStrategy: "استراتيجية يدوية",
+        manualStrategyHint: "قواعد صريحة (% العتبة، السعر...)",
+        aiStrategy: "استراتيجية ذكاء اصطناعي",
+        aiStrategyHint: "درجة مرجحة (الاتجاه، التقلب...)",
+        maxAllocationLabel: "الحد الاقصى لكل صفقة (TND)",
+        maxTransactionsLabel: "الحد الاقصى للمعاملات يوميا",
+        riskLevelLabel: "مستوى المخاطر",
+        riskLow: "منخفض",
+        riskMedium: "متوسط",
+        riskHigh: "مرتفع",
+        assetSymbolLabel: "الاصل (الرمز)",
+        assetPlaceholder: "— اختر اصلا —",
+        assetEmptyLabel: "لا توجد اصول مطابقة للفلاتر الحالية. عدل الفلاتر في صفحة الاسواق.",
+        assetRequiredHint: "الرجاء اختيار اصل للمتابعة.",
+        buyConditionLabel: "شرط شراء",
+        buyConditionPercentage: "% هبوط",
+        buyConditionPrice: "السعر الاقصى",
+        buyConditionAiSignal: "اشارة ذكاء اصطناعي",
+        buyThresholdLabel: "عتبة الشراء (% او سعر TND حسب الوضع)",
+        reinforceWithAiSignal: "تعزيز باستخدام اشارة الذكاء الاصطناعي (الوضع اليدوي)",
+        takeProfitLabel: "جني الربح (%)",
+        stopLossLabel: "وقف الخسارة (%)",
+        useAiExitLabel: "خروج بمساعدة الذكاء الاصطناعي",
+        riskWarningTitle: "تحذير المخاطر",
+        riskWarningBody:
+          "التداول الآلي يحمل مخاطر خسارة رأس المال. الأداء السابق لا يضمن النتائج المستقبلية. تعتمد المحرك على بيانات السوق التي قد تكون غير متاحة أو متأخرة.",
+        riskScoreTitle: "درجة المخاطر المقدرة (استرشادية)",
+        riskScoreSubtitle: "بناءً على الحد الأقصى لكل صفقة، مستوى المخاطر، وحد التكرار.",
+        summaryNameLabel: "الاسم:",
+        summaryModeLabel: "الوضع:",
+        summaryMaxTradeLabel: "الحد الأقصى / صفقة:",
+        summaryAssetLabel: "الاصل:",
+        confirmRiskLabel:
+          "أؤكد أنني قرأت التحذير وأقبل أن بدء البوت هو مسؤوليتي.",
+        back: "رجوع",
+        next: "التالي",
+        createBot: "انشاء البوت",
+        creating: "جار الانشاء...",
+        errorChooseAsset: "اختر اصلا للمتابعة.",
+        errorChooseAssetSymbol: "اختر رمز الاصول.",
+        errorConfirmRisk: "يجب التأكيد بأنك تفهم المخاطر.",
+        successCreated: "تم انشاء البوت. يمكنك تشغيله من لوحة التحكم.",
+        errorCreationFailed: "فشل الانشاء",
       },
       simulator: {
         title: "محاكي الاستثمار",

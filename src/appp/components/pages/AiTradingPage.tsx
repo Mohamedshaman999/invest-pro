@@ -15,18 +15,32 @@ function statusDot(status: AiTradingBotRow["status"]) {
   return "bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.45)]";
 }
 
-function formatTs(iso: string) {
+function formatTs(iso: string, locale: string) {
   try {
-    return new Date(iso).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "medium" });
+    return new Date(iso).toLocaleString(locale, { dateStyle: "short", timeStyle: "medium" });
   } catch {
     return iso;
   }
 }
 
+function languageToLocale(language: string) {
+  return language === "fr"
+    ? "fr-FR"
+    : language === "es"
+    ? "es-ES"
+    : language === "de"
+    ? "de-DE"
+    : language === "ar"
+    ? "ar-EG"
+    : "en-US";
+}
+
 export function AiTradingPage() {
   const { user } = useAuth();
   const { getTotalProfit } = usePortfolio();
-  const { text } = useLanguage();
+  const { text, language } = useLanguage();
+  const t = text.pages.aiTradingPage;
+  const locale = languageToLocale(language);
   const [bots, setBots] = useState<AiTradingBotRow[]>([]);
   const [feed, setFeed] = useState<AiTradingFeedRow[]>([]);
   const [selectedBotId, setSelectedBotId] = useState<string | null>(null);
@@ -47,7 +61,7 @@ export function AiTradingPage() {
         return res.bots[0]?.id ?? null;
       });
     } catch {
-      toast.error("Impossible de charger les bots.");
+      toast.error(t.loadBotsError);
     } finally {
       setLoading(false);
     }
@@ -61,7 +75,7 @@ export function AiTradingPage() {
       setMarketBanner(null);
     } catch {
       setFeed([]);
-      setMarketBanner("Historique indisponible pour ce bot.");
+      setMarketBanner(t.marketBannerUnavailable);
     } finally {
       setFeedLoading(false);
     }
@@ -84,7 +98,7 @@ export function AiTradingPage() {
     onBotStarted: () => void loadBots(),
     onBotPaused: () => void loadBots(),
     onLossLimit: () => {
-      toast.warning("Limite de perte journalière atteinte : le bot a été arrêté.");
+      toast.warning(t.dailyLossLimitReached);
       void loadBots();
     },
   });
@@ -98,12 +112,16 @@ export function AiTradingPage() {
     try {
       await investApi.patchAiTradingBotStatus(botId, status);
       toast.success(
-        status === "active" ? "Bot démarré." : status === "paused" ? "Bot en pause." : "Bot arrêté."
+        status === "active"
+          ? t.botStartedToast
+          : status === "paused"
+          ? t.botPausedToast
+          : t.botStoppedToast
       );
       await loadBots();
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Action impossible";
-      toast.error(msg);
+      toast.error(msg || t.actionFailed);
     }
   }
 
@@ -119,16 +137,14 @@ export function AiTradingPage() {
       <div className="relative mx-auto max-w-6xl space-y-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-cyan-300/80">Module IA</p>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-cyan-300/80">{t.moduleLabel}</p>
             <h1
               className="mt-1 text-3xl font-bold tracking-tight text-white"
               style={{ fontFamily: "Orbitron, ui-sans-serif, system-ui, sans-serif" }}
             >
-              Trading IA
+              {t.title}
             </h1>
-            <p className="mt-2 max-w-xl text-sm text-zinc-400">
-              Pilotez des agents conformes à vos plafonds, avec journalisation temps réel et arrêt immédiat.
-            </p>
+            <p className="mt-2 max-w-xl text-sm text-zinc-400">{t.subtitle}</p>
           </div>
           <button
             type="button"
@@ -136,30 +152,27 @@ export function AiTradingPage() {
             className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition hover:brightness-110"
           >
             <Bot className="h-5 w-5" />
-            Nouveau bot
+            {t.newBot}
           </button>
         </header>
 
         {!user?.isVerified ? (
           <div className={`${card} flex items-start gap-3 border-amber-500/20 bg-amber-500/5`}>
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
-            <p className="text-sm text-amber-100/90">
-              Vérifiez votre adresse e-mail pour activer le trading automatisé (même règle que l’achat / vente
-              manuels).
-            </p>
+            <p className="text-sm text-amber-100/90">{t.verificationRequired}</p>
           </div>
         ) : null}
 
         <div className="grid gap-6 lg:grid-cols-3">
           <div className={`${card} lg:col-span-2`}>
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">Bots actifs</h2>
+              <h2 className="text-lg font-semibold text-white">{t.activeBotsHeading}</h2>
               <span className="text-xs text-zinc-500">{text.nav.aiTrading}</span>
             </div>
             {loading ? (
-              <p className="text-sm text-zinc-500">Chargement…</p>
+              <p className="text-sm text-zinc-500">{t.loading}</p>
             ) : bots.length === 0 ? (
-              <p className="text-sm text-zinc-500">Aucun bot. Créez-en un avec l’assistant.</p>
+              <p className="text-sm text-zinc-500">{t.emptyBots}</p>
             ) : (
               <ul className="space-y-3">
                 {bots.map((b) => (
@@ -178,8 +191,8 @@ export function AiTradingPage() {
                         <div className="min-w-0">
                           <p className="truncate font-medium text-white">{b.name}</p>
                           <p className="truncate text-xs text-zinc-500">
-                            {b.mode === "ai_strategy" ? "Stratégie IA" : "Manuel"} · max {b.maxTransactionsPerDay}{" "}
-                            tx/j · {b.maxAllocation} TND / trade
+                            {b.mode === "ai_strategy" ? t.modeAiStrategy : t.modeManual} · max {b.maxTransactionsPerDay}{" "}
+                            {t.transactionsPerDay} · {b.maxAllocation} TND / trade
                           </p>
                         </div>
                       </div>
@@ -194,8 +207,8 @@ export function AiTradingPage() {
           </div>
 
           <div className={`${card}`}>
-            <h2 className="mb-1 text-lg font-semibold text-white">P&amp;L portefeuille</h2>
-            <p className="text-xs text-zinc-500">Vue globale (toutes sources confondues)</p>
+            <h2 className="mb-1 text-lg font-semibold text-white">{t.pnlTitle}</h2>
+            <p className="text-xs text-zinc-500">{t.pnlSubtitle}</p>
             <p
               className={`mt-4 text-3xl font-semibold tabular-nums ${pnl >= 0 ? "text-emerald-300" : "text-rose-300"}`}
             >
@@ -203,7 +216,7 @@ export function AiTradingPage() {
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
               <Radio className="h-4 w-4 text-cyan-400/80" />
-              Flux Socket.io : trades et contrôle bot
+              {t.socketStream}
             </div>
           </div>
         </div>
@@ -211,9 +224,9 @@ export function AiTradingPage() {
         {selectedBot ? (
           <div className="grid gap-6 lg:grid-cols-3">
             <div className={`${card} lg:col-span-1`}>
-              <h2 className="mb-4 text-lg font-semibold text-white">Panneau de contrôle</h2>
+              <h2 className="mb-4 text-lg font-semibold text-white">{t.controlPanelTitle}</h2>
               <p className="mb-4 text-xs leading-relaxed text-zinc-500">
-                Bot sélectionné : <span className="text-zinc-200">{selectedBot.name}</span>
+                {t.selectedBot} <span className="text-zinc-200">{selectedBot.name}</span>
               </p>
               <div className="flex flex-col gap-2">
                 <button
@@ -222,7 +235,7 @@ export function AiTradingPage() {
                   onClick={() => void setStatus(selectedBot.id, "active")}
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-sm font-medium text-emerald-100 transition hover:bg-emerald-500/20 disabled:opacity-40"
                 >
-                  <Play className="h-4 w-4" /> Démarrer
+                  <Play className="h-4 w-4" /> {t.start}
                 </button>
                 <button
                   type="button"
@@ -230,7 +243,7 @@ export function AiTradingPage() {
                   onClick={() => void setStatus(selectedBot.id, "paused")}
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2.5 text-sm font-medium text-amber-100 transition hover:bg-amber-500/20 disabled:opacity-40"
                 >
-                  <Pause className="h-4 w-4" /> Pause
+                  <Pause className="h-4 w-4" /> {t.pause}
                 </button>
                 <button
                   type="button"
@@ -238,18 +251,17 @@ export function AiTradingPage() {
                   onClick={() => void setStatus(selectedBot.id, "stopped")}
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-rose-500/35 bg-rose-500/10 px-4 py-2.5 text-sm font-medium text-rose-100 transition hover:bg-rose-500/20 disabled:opacity-40"
                 >
-                  <Square className="h-4 w-4" /> Arrêt dur
+                  <Square className="h-4 w-4" /> {t.stopHard}
                 </button>
               </div>
               <p className="mt-4 text-[11px] text-zinc-600">
-                Perte réalisée aujourd’hui (estimation bot) :{" "}
-                <span className="text-zinc-300">{selectedBot.dailyRealizedLossTnd?.toFixed?.(2) ?? 0} TND</span>
+                {t.realizedLossToday} <span className="text-zinc-300">{selectedBot.dailyRealizedLossTnd?.toFixed?.(2) ?? 0} TND</span>
               </p>
             </div>
 
             <div className={`${card} lg:col-span-2`}>
               <div className="mb-4 flex items-center justify-between gap-2">
-                <h2 className="text-lg font-semibold text-white">Flux des opérations</h2>
+                <h2 className="text-lg font-semibold text-white">{t.operationsFeedTitle}</h2>
                 <Activity className="h-5 w-5 text-cyan-400/70" />
               </div>
               {marketBanner ? (
@@ -258,22 +270,19 @@ export function AiTradingPage() {
                 </p>
               ) : null}
               {feedLoading ? (
-                <p className="text-sm text-zinc-500">Chargement du flux…</p>
+                <p className="text-sm text-zinc-500">{t.feedLoading}</p>
               ) : feed.length === 0 ? (
-                <p className="text-sm text-zinc-500">
-                  Aucune opération enregistrée. Les exécutions apparaîtront ici (y compris les rejets risque /
-                  liquidité).
-                </p>
+                <p className="text-sm text-zinc-500">{t.feedEmpty}</p>
               ) : (
                 <div className="overflow-x-auto rounded-xl border border-white/10">
                   <table className="w-full min-w-[480px] text-left text-sm">
                     <thead className="border-b border-white/10 bg-black/30 text-xs uppercase tracking-wide text-zinc-500">
                       <tr>
-                        <th className="px-3 py-2">Actif</th>
-                        <th className="px-3 py-2">Action</th>
-                        <th className="px-3 py-2">Montant</th>
-                        <th className="px-3 py-2">Résultat</th>
-                        <th className="px-3 py-2">Heure</th>
+                        <th className="px-3 py-2">{t.tableHeaderAsset}</th>
+                        <th className="px-3 py-2">{t.tableHeaderAction}</th>
+                        <th className="px-3 py-2">{t.tableHeaderAmount}</th>
+                        <th className="px-3 py-2">{t.tableHeaderResult}</th>
+                        <th className="px-3 py-2">{t.tableHeaderTime}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
@@ -284,18 +293,18 @@ export function AiTradingPage() {
                           <td className="px-3 py-2 tabular-nums">{formatTndWithUnit(row.amount)}</td>
                           <td className="px-3 py-2">
                             {row.status === "success" && (
-                              <span className="text-emerald-300/90">Succès</span>
+                              <span className="text-emerald-300/90">{t.statusSuccess}</span>
                             )}
                             {row.status === "pending" && (
-                              <span className="text-amber-200/90">En attente</span>
+                              <span className="text-amber-200/90">{t.statusPending}</span>
                             )}
                             {row.status === "failed" && (
                               <span className="text-rose-300/90" title={row.errorMessage || ""}>
-                                Échec
+                                {t.statusFailed}
                               </span>
                             )}
                           </td>
-                          <td className="px-3 py-2 text-xs text-zinc-500">{formatTs(row.timestamp)}</td>
+                          <td className="px-3 py-2 text-xs text-zinc-500">{formatTs(row.timestamp, locale)}</td>
                         </tr>
                       ))}
                     </tbody>
