@@ -1,0 +1,39 @@
+{
+  "name": "investment-portfolio-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test ./tests/accessTokenVersion.test.js ./tests/passwordChangeSchemas.test.js",
+    "db:reset": "docker compose down -v && docker compose up -d",
+    "market-watch:sync": "node scripts/runMarketWatchSync.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bcryptjs": "^2.4.3",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.16",
+    "pdfkit": "^0.18.0",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "qrcode": "^1.5.4",
+    "sequelize": "^6.37.5",
+    "socket.io": "^4.8.3",
+    "speakeasy": "^2.0.0",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0"
+  }
+}

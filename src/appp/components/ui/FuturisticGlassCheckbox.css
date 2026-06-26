@@ -1,0 +1,74 @@
+/* Scoped custom checkbox — palette violette (.container > input + .checkmark) */
+
+.futuristicGlassCheckboxHost .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.futuristicGlassCheckboxHost .container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+/* Create a custom checkbox */
+.futuristicGlassCheckboxHost .checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1.4em;
+  width: 1.4em;
+  border: 2px solid #a855f7;
+  border-radius: 1rem 0rem 1rem;
+  transform: rotate(45deg);
+  transition: all 0.5s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* When checked */
+.futuristicGlassCheckboxHost .container input:checked ~ .checkmark {
+  box-shadow: 0px 0px 40px 5px #7c3aed;
+  border-radius: 1rem 0rem 1rem;
+  background-color: rgba(168, 85, 247, 0.12);
+}
+
+/* Checkmark hidden by default */
+.futuristicGlassCheckboxHost .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show checkmark when checked */
+.futuristicGlassCheckboxHost .container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Checkmark style */
+.futuristicGlassCheckboxHost .container .checkmark:after {
+  left: 0.35em;
+  top: 0.2em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid #a855f7;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(-5deg);
+  animation: futuristicGlassCheckbox-upAnimate 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes futuristicGlassCheckbox-upAnimate {
+  from {
+    transform: translate(-20px, -20px) rotate(-5deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, 0) rotate(-5deg);
+    opacity: 1;
+  }
+}

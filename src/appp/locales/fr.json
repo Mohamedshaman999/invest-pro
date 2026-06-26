@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "withdraw": "Retrait"
+  },
+  "header": {
+    "stndChipLabel": "Solde",
+    "stndUnit": "TND"
+  },
+  "pages": {
+    "portfolio": {
+      "insufficientStnd": "Solde TND insuffisant",
+      "withdraw": "Retrait"
+    },
+    "loadAccount": {
+      "creditedStndDetail": "Le montant a ete credite en TND sur votre portefeuille (1:1 avec le dinar tunisien).",
+      "stepOf": "Etape {current} sur {total}",
+      "summaryTitle": "Resume",
+      "summaryCharge": "Chargement",
+      "securePaymentTitle": "Paiement securise",
+      "securePaymentCopy": "Vos donnees sont protegees avec un traitement securise et une transmission chiffree.",
+      "fastFundingTitle": "Approvisionnement rapide",
+      "fastFundingPoints": [
+        "Credit TND immediat",
+        "Choix de montant flexible",
+        "Parcours de paiement securise"
+      ],
+      "reviewChargeNote": "Le debit sera effectue selon le mode de paiement selectionne.",
+      "back": "Retour",
+      "continue": "Continuer",
+      "cardEnding": "Carte se terminant par",
+      "d17Via": "Paiement mobile D17 via",
+      "summaryMethodCard": "Paiement par carte",
+      "summaryMethodD17": "Paiement mobile D17"
+    },
+    "withdraw": {
+      "title": "Retrait",
+      "subtitle": "Transferez votre solde TND vers votre compte bancaire",
+      "amountLabel": "Montant (TND)",
+      "methodTitle": "Mode de retrait",
+      "methodBankTitle": "Virement bancaire",
+      "methodBankDesc": "Vers votre compte en Tunisie",
+      "beneficiaryTitle": "Coordonnees du compte",
+      "fullNameLabel": "Nom complet du titulaire",
+      "fullNamePlaceholder": "Nom et prenom",
+      "ribLabel": "RIB",
+      "ribPlaceholder": "XX XXX XXXXXXXXXXXXX XX",
+      "ribHint": "20 chiffres au format 2-3-13-2",
+      "bankLabel": "Banque",
+      "bankPlaceholder": "Selectionnez une banque",
+      "confirmWithdrawal": "Confirmer le retrait",
+      "reviewNote": "Le montant sera deduit de votre solde TND apres confirmation.",
+      "successPending": "Demande de retrait en cours",
+      "successDetail": "Les fonds seront traites sous peu sur le compte indique.",
+      "ribInvalid": "RIB incomplet ou invalide (20 chiffres requis)",
+      "amountExceedsBalance": "Le montant depasse votre solde TND",
+      "summaryTitle": "Resume",
+      "summaryAmount": "Montant",
+      "summaryBank": "Banque",
+      "summaryHolder": "Titulaire",
+      "summaryRib": "RIB",
+      "availableBalance": "Solde disponible"
+    },
+    "wallet": {
+      "stndExplainer": "Soldes en dinar tunisien (TND)"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "withdraw": "Withdraw"
+  },
+  "header": {
+    "stndChipLabel": "Balance",
+    "stndUnit": "TND"
+  },
+  "pages": {
+    "portfolio": {
+      "insufficientStnd": "Insufficient TND balance",
+      "withdraw": "Withdraw"
+    },
+    "loadAccount": {
+      "creditedStndDetail": "The amount has been credited in TND to your wallet (1:1 with Tunisian Dinar).",
+      "stepOf": "Step {current} of {total}",
+      "summaryTitle": "Summary",
+      "summaryCharge": "Top-up",
+      "securePaymentTitle": "Secure payment",
+      "securePaymentCopy": "Your data is protected with secure processing and encrypted transmission.",
+      "fastFundingTitle": "Fast funding",
+      "fastFundingPoints": [
+        "Instant TND credit",
+        "Flexible amount selection",
+        "Secure checkout flow"
+      ],
+      "reviewChargeNote": "The charge will be processed using your selected payment method.",
+      "back": "Back",
+      "continue": "Continue",
+      "cardEnding": "Card ending in",
+      "d17Via": "D17 mobile payment via",
+      "summaryMethodCard": "Card payment",
+      "summaryMethodD17": "D17 mobile payment"
+    },
+    "withdraw": {
+      "title": "Withdraw",
+      "subtitle": "Transfer your TND balance to your bank account",
+      "amountLabel": "Amount (TND)",
+      "methodTitle": "Withdrawal method",
+      "methodBankTitle": "Bank transfer",
+      "methodBankDesc": "To your account in Tunisia",
+      "beneficiaryTitle": "Account details",
+      "fullNameLabel": "Full name of account holder",
+      "fullNamePlaceholder": "First and last name",
+      "ribLabel": "RIB",
+      "ribPlaceholder": "XX XXX XXXXXXXXXXXXX XX",
+      "ribHint": "20 digits in 2-3-13-2 format",
+      "bankLabel": "Bank",
+      "bankPlaceholder": "Select a bank",
+      "confirmWithdrawal": "Confirm withdrawal",
+      "reviewNote": "The amount will be deducted from your TND balance upon confirmation.",
+      "successPending": "Withdrawal request pending",
+      "successDetail": "Funds will be processed shortly to the account you specified.",
+      "ribInvalid": "Incomplete or invalid RIB (20 digits required)",
+      "amountExceedsBalance": "Amount exceeds your TND balance",
+      "summaryTitle": "Summary",
+      "summaryAmount": "Amount",
+      "summaryBank": "Bank",
+      "summaryHolder": "Account holder",
+      "summaryRib": "RIB",
+      "availableBalance": "Available balance"
+    },
+    "wallet": {
+      "stndExplainer": "Balances shown in Tunisian Dinar (TND)"
+    }
+  }
+}

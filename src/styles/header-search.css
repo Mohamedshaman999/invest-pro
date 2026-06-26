@@ -1,0 +1,350 @@
+/* Theme-adaptive header search: Cyber-Neon (default) / Light Glass (body.light) */
+
+:root {
+  --search-bg: #010201;
+  --search-text: #ffffff;
+  --search-placeholder: #c0b9c0;
+  --search-conic-base: #000000;
+  --search-glow-opacity: 0.4;
+  --search-filter-bg: linear-gradient(180deg, #161329, #000000, #1d1b4b);
+  --search-mask-color: #000000;
+  --search-icon-color: #d6d6e6;
+  --search-conic-accent-a: #402fb5;
+  --search-conic-accent-b: #cf30aa;
+  --search-conic-border-tile: #1c191c;
+  --search-layer-opacity: 0.22;
+  --search-white-layer-opacity: 0.08;
+  --search-pink-mask-opacity: 0.07;
+  --search-filter-border-color: transparent;
+}
+
+body.light {
+  --search-bg: #ffffff;
+  --search-text: #18181b;
+  --search-placeholder: #a1a1aa;
+  --search-conic-base: #f4f4f5;
+  --search-glow-opacity: 0.12;
+  --search-filter-bg: linear-gradient(180deg, #f4f4f5, #e4e4e7, #f4f4f5);
+  --search-mask-color: #ffffff;
+  --search-icon-color: #71717a;
+  --search-conic-accent-a: #7c3aed;
+  --search-conic-accent-b: #c026d3;
+  --search-conic-border-tile: #e4e4e7;
+  --search-layer-opacity: 0.35;
+  --search-white-layer-opacity: 0.55;
+  --search-pink-mask-opacity: 0.04;
+  --search-filter-border-color: rgba(0, 0, 0, 0.06);
+}
+
+.ip-header-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  min-height: 56px;
+}
+
+.ip-header-search .ip-header-search__glow,
+.ip-header-search .ip-header-search__border,
+.ip-header-search .ip-header-search__white,
+.ip-header-search .ip-header-search__dark-border-bg {
+  max-height: 70px;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 56px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: 12px;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.ip-header-search .ip-header-search__glow {
+  filter: blur(30px);
+  opacity: var(--search-glow-opacity);
+}
+
+.ip-header-search .ip-header-search__glow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 999px;
+  height: 999px;
+  transform: translate(-50%, -50%) rotate(60deg);
+  background-image: conic-gradient(
+    var(--search-conic-base),
+    var(--search-conic-accent-a) 5%,
+    var(--search-conic-base) 38%,
+    var(--search-conic-base) 50%,
+    var(--search-conic-accent-b) 60%,
+    var(--search-conic-base) 87%
+  );
+  transition: transform 2s ease;
+}
+
+.ip-header-search .ip-header-search__border::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%) rotate(70deg);
+  background-image: conic-gradient(
+    var(--search-conic-border-tile),
+    var(--search-conic-accent-a) 5%,
+    var(--search-conic-border-tile) 14%,
+    var(--search-conic-border-tile) 50%,
+    var(--search-conic-accent-b) 60%,
+    var(--search-conic-border-tile) 64%
+  );
+  transition: transform 2s ease;
+}
+
+.ip-header-search .ip-header-search__dark-border-bg {
+  filter: blur(8px);
+  opacity: var(--search-layer-opacity);
+  border-radius: 14px;
+}
+
+.ip-header-search .ip-header-search__dark-border-bg:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  transform: translate(-50%, -50%) rotate(55deg);
+  background-image: conic-gradient(
+    var(--search-conic-base),
+    var(--search-conic-accent-a) 6%,
+    var(--search-conic-base) 35%,
+    var(--search-conic-base) 50%,
+    var(--search-conic-accent-b) 58%,
+    var(--search-conic-base) 82%
+  );
+}
+
+.ip-header-search .ip-header-search__dark-border-bg:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  transform: translate(-50%, -50%) rotate(85deg);
+  background-image: conic-gradient(
+    var(--search-conic-base),
+    var(--search-conic-accent-a) 6%,
+    var(--search-conic-base) 35%,
+    var(--search-conic-base) 50%,
+    var(--search-conic-accent-b) 58%,
+    var(--search-conic-base) 82%
+  );
+}
+
+.ip-header-search .ip-header-search__dark-border-bg:nth-child(4)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  transform: translate(-50%, -50%) rotate(110deg);
+  background-image: conic-gradient(
+    var(--search-conic-base),
+    var(--search-conic-accent-a) 6%,
+    var(--search-conic-base) 35%,
+    var(--search-conic-base) 50%,
+    var(--search-conic-accent-b) 58%,
+    var(--search-conic-base) 82%
+  );
+}
+
+.ip-header-search .ip-header-search__white {
+  filter: blur(6px);
+  opacity: var(--search-white-layer-opacity);
+}
+
+.ip-header-search .ip-header-search__white::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: var(--search-bg);
+}
+
+.ip-header-search__main {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  width: 100%;
+  height: 56px;
+}
+
+.ip-header-search__input {
+  position: relative;
+  z-index: 1;
+  background-color: var(--search-bg);
+  color: var(--search-text);
+  border: none;
+  width: 100%;
+  height: 56px;
+  border-radius: 10px;
+  padding-inline: 3.25rem 3.75rem;
+  font-size: 16px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.ip-header-search__input::placeholder {
+  color: var(--search-placeholder);
+  opacity: 1;
+}
+
+.ip-header-search__input:focus {
+  outline: none;
+}
+
+.ip-header-search .filterBorder {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 38px;
+  height: 40px;
+  border-radius: 10px;
+  pointer-events: none;
+  border: 1px solid var(--search-filter-border-color);
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.ip-header-search__filter-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 38px;
+  height: 40px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--search-filter-bg);
+  border-radius: 10px;
+  color: var(--search-icon-color);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.ip-header-search__filter-btn:hover {
+  color: var(--search-text);
+}
+
+.ip-header-search__filter-btn:focus-visible {
+  outline: 2px solid var(--search-conic-accent-a);
+  outline-offset: 2px;
+}
+
+.ip-header-search__filter-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  color: #faf5ff;
+  background: linear-gradient(135deg, var(--search-conic-accent-a), var(--search-conic-accent-b));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.ip-header-search__search-icon {
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--search-icon-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ip-header-search:focus-within .ip-header-search__glow::before {
+  transform: translate(-50%, -50%) rotate(420deg);
+}
+
+.ip-header-search:focus-within .ip-header-search__border::before {
+  transform: translate(-50%, -50%) rotate(430deg);
+}
+
+/* Dropdown sous la barre de recherche (header) */
+.ip-header-search-wrap {
+  overflow: visible;
+}
+
+@keyframes ip-header-search-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ip-header-search-dropdown {
+  animation: ip-header-search-dropdown-in 200ms ease-out;
+}
+
+@keyframes ip-header-search-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ip-header-search-skeleton-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.ip-header-search-skeleton-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--search-icon-color) 22%, transparent),
+    transparent
+  );
+  animation: ip-header-search-shimmer 1.15s ease-in-out infinite;
+  transform: translateX(-100%);
+}
+
+body.light .ip-header-search-skeleton-shine::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, #7c3aed 14%, transparent),
+    transparent
+  );
+}

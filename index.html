@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Investment Portfolio Management App</title>
+    <link rel="stylesheet" href="/src/styles/page-loader.css" />
+    <script>
+      (function () {
+        try {
+          var k = "investpro-theme";
+          var s = localStorage.getItem(k);
+          var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var dark = s === "dark" || (s !== "light" && systemDark);
+          document.documentElement.dataset.appTheme = dark ? "dark" : "light";
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {
+          document.documentElement.dataset.appTheme = "dark";
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="page-loader" class="loader-overlay">
+      <div class="loader" role="status" aria-live="polite" aria-label="Chargement">
+        <svg
+          id="pegtopone"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <defs>
+            <filter id="ip-pt1-shine">
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
+            <mask id="ip-pt1-mask">
+              <path
+                d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+                fill="white"
+              />
+            </mask>
+            <radialGradient
+              id="ip-pt1-g1"
+              cx="50"
+              cy="66"
+              fx="50"
+              fy="66"
+              r="30"
+              gradientTransform="translate(0 35) scale(1 0.5)"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stop-color="black" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="black" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="black" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient
+              id="ip-pt1-g2"
+              cx="55"
+              cy="20"
+              fx="55"
+              fy="20"
+              r="30"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stop-color="white" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="white" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="white" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient
+              id="ip-pt1-g3"
+              cx="85"
+              cy="50"
+              fx="85"
+              fy="50"
+              xlink:href="#ip-pt1-g2"
+            />
+            <radialGradient
+              id="ip-pt1-g4"
+              cx="50"
+              cy="58"
+              fx="50"
+              fy="58"
+              r="60"
+              gradientTransform="translate(0 47) scale(1 0.2)"
+              xlink:href="#ip-pt1-g3"
+            />
+            <linearGradient id="ip-pt1-g5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="black" stop-opacity="0.2" />
+              <stop offset="40%" stop-color="black" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g>
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="currentColor"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt1-g1)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="none"
+              stroke="white"
+              opacity="0.3"
+              stroke-width="3"
+              filter="url(#ip-pt1-shine)"
+              mask="url(#ip-pt1-mask)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt1-g2)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt1-g3)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt1-g4)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt1-g5)"
+            />
+          </g>
+        </svg>
+        <svg
+          id="pegtoptwo"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <defs>
+            <filter id="ip-pt2-shine">
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
+            <mask id="ip-pt2-mask">
+              <path
+                d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+                fill="white"
+              />
+            </mask>
+            <radialGradient
+              id="ip-pt2-g1"
+              cx="50"
+              cy="66"
+              fx="50"
+              fy="66"
+              r="30"
+              gradientTransform="translate(0 35) scale(1 0.5)"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stop-color="black" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="black" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="black" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient
+              id="ip-pt2-g2"
+              cx="55"
+              cy="20"
+              fx="55"
+              fy="20"
+              r="30"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stop-color="white" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="white" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="white" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="ip-pt2-g3" cx="85" cy="50" fx="85" fy="50" xlink:href="#ip-pt2-g2" />
+            <radialGradient
+              id="ip-pt2-g4"
+              cx="50"
+              cy="58"
+              fx="50"
+              fy="58"
+              r="60"
+              gradientTransform="translate(0 47) scale(1 0.2)"
+              xlink:href="#ip-pt2-g3"
+            />
+            <linearGradient id="ip-pt2-g5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="black" stop-opacity="0.2" />
+              <stop offset="40%" stop-color="black" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g>
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="currentColor"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt2-g1)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="none"
+              stroke="white"
+              opacity="0.3"
+              stroke-width="3"
+              filter="url(#ip-pt2-shine)"
+              mask="url(#ip-pt2-mask)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt2-g2)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt2-g3)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt2-g4)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt2-g5)"
+            />
+          </g>
+        </svg>
+        <svg
+          id="pegtopthree"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <defs>
+            <filter id="ip-pt3-shine">
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
+            <mask id="ip-pt3-mask">
+              <path
+                d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+                fill="white"
+              />
+            </mask>
+            <radialGradient
+              id="ip-pt3-g1"
+              cx="50"
+              cy="66"
+              fx="50"
+              fy="66"
+              r="30"
+              gradientTransform="translate(0 35) scale(1 0.5)"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stop-color="black" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="black" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="black" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient
+              id="ip-pt3-g2"
+              cx="55"
+              cy="20"
+              fx="55"
+              fy="20"
+              r="30"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stop-color="white" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="white" stop-opacity="0.1" />
+              <stop offset="100%" stop-color="white" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="ip-pt3-g3" cx="85" cy="50" fx="85" fy="50" xlink:href="#ip-pt3-g2" />
+            <radialGradient
+              id="ip-pt3-g4"
+              cx="50"
+              cy="58"
+              fx="50"
+              fy="58"
+              r="60"
+              gradientTransform="translate(0 47) scale(1 0.2)"
+              xlink:href="#ip-pt3-g3"
+            />
+            <linearGradient id="ip-pt3-g5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="black" stop-opacity="0.2" />
+              <stop offset="40%" stop-color="black" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g>
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="currentColor"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt3-g1)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="none"
+              stroke="white"
+              opacity="0.3"
+              stroke-width="3"
+              filter="url(#ip-pt3-shine)"
+              mask="url(#ip-pt3-mask)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt3-g2)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt3-g3)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt3-g4)"
+            />
+            <path
+              d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z"
+              fill="url(#ip-pt3-g5)"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+  </html>
+  
