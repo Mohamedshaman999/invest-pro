@@ -28,9 +28,7 @@ async function main() {
   await seedDemoUsersIfMissing();
   await ensureWalletsForUsersWithoutOne();
   await seedAssetsIfEmpty();
-  runPriceUpdateOnce().catch((e) =>
-    logger.warn(`Initial BVMT price update skipped or failed: ${e?.message || e}`)
-  );
+  
   startPriceUpdateJob();
   startBourseMarketWatchJob();
   startAiTradingJob();

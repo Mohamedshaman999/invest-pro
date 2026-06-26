@@ -6,6 +6,10 @@ import { logger } from "../utils/logger.js";
 let task = null;
 
 export function startPriceUpdateJob() {
+  if (!config.bvmt.enabled) {
+    logger.info("BVMT price update job is disabled");
+    return;
+  }
   if (task) return;
   const expr = config.bvmt.cron;
   if (!cron.validate(expr)) {

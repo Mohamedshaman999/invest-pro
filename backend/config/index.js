@@ -55,14 +55,17 @@ export default {
   },
   frontendUrl: process.env.FRONTEND_URL || "http://localhost:5173",
   bvmt: {
+    enabled: process.env.BVMT_RUN_ON_SERVER === "true",
     scrapeUrl: process.env.BVMT_SCRAPE_URL || "https://www.bvmt.com.tn/en/cours",
     cron: process.env.BVMT_CRON || "*/7 * * * *",
     requestTimeoutMs: Number(process.env.BVMT_TIMEOUT_MS) || 15000,
   },
   bourseMarketWatch: {
+    enabled: process.env.BOURSE_MARKET_WATCH_ENABLED === "true",
     /** When false, no in-process cron is registered on the API server (use scripts/runMarketWatchSync.js from system cron instead). */
-    runOnApiServer: process.env.BOURSE_MARKET_WATCH_RUN_ON_SERVER !== "false",
+    runOnApiServer: process.env.BOURSE_MARKET_WATCH_RUN_ON_SERVER === "true",
     requestTimeoutMs: Number(process.env.BOURSE_MARKET_WATCH_TIMEOUT_MS) || 20000,
+    cron: process.env.BOURSE_MARKET_WATCH_CRON || "*/7 * * * *",
     /** Portal page used to resolve the Market Station iframe (optional discovery). */
     portalUrl: process.env.BOURSE_MARKET_PORTAL_URL || "http://www.bourse.tn/market-place",
     /**
@@ -124,7 +127,7 @@ export default {
   },
   /** Tâche planifiée pour l’orchestrateur de bots IA (cron node-cron, 5 champs). */
   aiTrading: {
-    enabled: process.env.AI_TRADING_ENABLED !== "false",
+    enabled: process.env.AI_TRADING_ENABLED === "true",
     cron: process.env.AI_TRADING_CRON || "*/1 * * * *",
   },
   /** Snapshot côté assistant : âge max des cotations pour considérer les données « une séance » (re-classement systématique). */

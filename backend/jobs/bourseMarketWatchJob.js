@@ -41,7 +41,7 @@ export function startBourseMarketWatchJob() {
     return;
   }
 
-  const expr = "*/15 * * * 1-5";
+  const expr = config.bourseMarketWatch.cron;
   if (!cron.validate(expr)) {
     logger.error(`Invalid cron expression for Market Watch: ${expr}`);
     return;

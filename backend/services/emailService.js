@@ -86,8 +86,7 @@ export function getMailTransporter() {
   }
 
   const validPort = smtpEffectivePort();
-  const pass = (process.env.SMTP_PASS?.trim() ?? "").replace(/\s+/g, "");
-
+  
   transporter = nodemailer.createTransport({
     host,
     port: validPort,
@@ -95,7 +94,7 @@ export function getMailTransporter() {
     requireTLS: validPort === 587,
     auth: {
       user: process.env.SMTP_USER.trim(),
-      pass,
+      pass: process.env.SMTP_PASS?.trim()
     },
   });
 
